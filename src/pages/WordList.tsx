@@ -1,25 +1,14 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import WordView from '../components/WordView'
 
 interface Word {
   text: string
   meaning: string
 }
 
-function WordView(word: Word) {
-  return (
-    <div key={word.text}>
-      {word.text} / {word.meaning}
-    </div>
-  )
-}
-
 function WordList() {
-  const linkStyle = {
-    display: 'block',
-    padding: '8px'
-  }
   const [wordlist, setWordlist] = useState<Word[]>([])
   useEffect(() => {
     axios
@@ -28,7 +17,15 @@ function WordList() {
       )
       .then((res) => setWordlist(res.data))
   }, [])
-
+  const navigate = useNavigate()
+  function go(e: React.MouseEvent<HTMLButtonElement>) {
+    const target = e.target as HTMLElement
+    if (target.innerText === '퀴즈 보기') {
+      navigate('/quiz')
+    } else {
+      navigate('/')
+    }
+  }
   // TODO
   // 훅을 이용해서, 화면이 로드되면 아래 주소에서 단어를 들고와서 화면에 표시
   // 아래 샘플 단어를 대체해야 함.
@@ -39,10 +36,11 @@ function WordList() {
 
   return (
     <section>
-      {wordlist.map((word) => WordView(word))}
-      <Link to='/' style={linkStyle}>
-        홈으로
-      </Link>
+      {wordlist.map((word) => (
+        <WordView text={word.text} meaning={word.meaning} />
+      ))}
+      <button onClick={go}>홈으로</button>
+      <button onClick={go}>퀴즈 보기</button>
     </section>
   )
 }
