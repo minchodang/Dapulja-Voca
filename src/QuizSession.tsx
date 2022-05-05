@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ButtonHTMLAttributes, HtmlHTMLAttributes, useEffect, useReducer, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // State
@@ -7,6 +7,11 @@ type Quiz = {
   text: string // 문제
   answer: string // 정답
   selections: string[] // 보기 목록 (정답 포함), 2지 선다
+}
+
+type initialData = {
+  text: string
+  meanig: string
 }
 
 type QuizResult = {
@@ -22,6 +27,7 @@ type State = {
   correctCount: number // computed
   inCorrectCount: number // computed
   currentIndex: number // computed
+  payload: number
   quizList: Quiz[]
   quizResults: QuizResult[]
 }
@@ -35,37 +41,130 @@ type Select = {
   type: 'SELECT'
   payload: {
     quizIndex: number
-    selected: string
   }
 }
 
-type Action = Select
+type Action =
+  | Select
+  | {
+      type: 'CORRECTSELECT'
+      currentIndex: number
+      correctCount: number
+      payload: number
+    }
+  | {
+      type: 'INCORRECTSELECT'
+      currentIndex: number
+      inCorrectCoun: number
+    }
+  | {
+      type: 'FINAL'
+      isCompleted: boolean
+    }
 
-function quizSessionReducer(state: State, action: Action) {
+export function quizSessionReducer(state: State, action: Action): State {
   // TODO
   // 선택한 선지에 따라
   // state 값이 변경되어야 함.
   // 예를 들어, 퀴즈 결과가 생성되고
   // 맞은 혹은 틀린 개수가 업데이트 되고,
   // 다음 퀴즈로 넘어가야 함.
-  const newState = { ...state }
-  return newState
+  switch (action.type) {
+    case 'CORRECTSELECT':
+      return {
+        ...state,
+        currentIndex: state.currentIndex++,
+        correctCount: state.correctCount++
+      }
+    // const newState = { ...state }
+    // return {
+    //   ...newState,
+    //   currentIndex: action.currentIndex
+    // }
+    case 'INCORRECTSELECT':
+      return {
+        ...state,
+        currentIndex: state.currentIndex++,
+        inCorrectCount: state.inCorrectCount++
+      }
+    case 'FINAL':
+      return {
+        ...state,
+        isCompleted: true
+      }
+    default:
+      throw new Error('Unhandled action')
+  }
+  // const newState = { ...state }
+  // return newState
+}
+
+const initialState: State = {
+  isCompleted: false,
+  correctCount: 0,
+  inCorrectCount: 0,
+  currentIndex: 0,
+  payload: 1,
+  quizList: [
+    {
+      index: 0,
+      text: 'apple',
+      answer: 'n. 사과',
+      selections: ['n. 사과', 'n. 밀가루 반죽', 'a. 지속적인, 끈질긴']
+    },
+    {
+      index: 1,
+      text: 'brick',
+      answer: 'n. 벽돌',
+      selections: ['n. 벽돌', 'v. 뛰다, 급증하다']
+    },
+    {
+      index: 2,
+      text: 'apple',
+      answer: 'n. 사과',
+      selections: ['n. 사과', 'n. 밀가루 반죽', 'a. 지속적인, 끈질긴']
+    },
+    {
+      index: 3,
+      text: 'machine',
+      answer: 'n. 기계',
+      selections: ['n. 기계', 'n. 밀가루 반죽', 'a. 지속적인, 끈질긴']
+    },
+    {
+      index: 4,
+      text: 'run',
+      answer: 'v. 뛰다',
+      selections: ['v.뛰다', 'n. 밀가루 반죽', 'a. 지속적인, 끈질긴']
+    }
+  ],
+  quizResults: []
 }
 
 // View
-function QuizSessionView(state: State, onClick: (selected: string) => void) {
+function QuizSessionView(selector: State, onClick: (selected: string) => void, dispatch: Function) {
   function QuizView(quiz: Quiz) {
     const articleStyle = {
       marginTop: '16px',
       padding: '8px',
       background: '#efefef'
     }
+    const selecting = (e: React.MouseEvent<HTMLButtonElement>) => {
+      const target = e.target as HTMLElement
+      if (target.innerText === quiz.answer) {
+        dispatch({ type: 'CORRECTSELECT' })
+      } else {
+        dispatch({ type: 'INCORRECTSELECT' })
+      }
+      if (selector.quizList.length - 1 === selector.currentIndex) {
+        dispatch({ type: 'FINAL' })
+      }
+    }
     return (
       <article style={articleStyle}>
         <header>{quiz.text}</header>
         {quiz.selections.map((sel, idx) => {
           return (
-            <button key={idx} onClick={() => onClick(sel)}>
+            <button key={idx} onClick={selecting}>
               {sel}
             </button>
           )
@@ -74,14 +173,14 @@ function QuizSessionView(state: State, onClick: (selected: string) => void) {
     )
   }
 
-  const currentQuiz = state.quizList[state.currentIndex]
+  const currentQuiz = selector.quizList[selector.currentIndex]
 
   return (
     <section>
-      <div>완료 여부: {state.isCompleted ? '완료' : '미완료'}</div>
-      <div>맞은 개수 {state.correctCount}</div>
-      <div>틀린 개수 {state.inCorrectCount}</div>
-      {state.isCompleted ? <Link to='/'>홈으로</Link> : QuizView(currentQuiz)}
+      <div>완료 여부: {selector.isCompleted ? '완료' : '미완료'}</div>
+      <div>맞은 개수 {selector.correctCount}</div>
+      <div>틀린 개수 {selector.inCorrectCount}</div>
+      {selector.isCompleted ? <Link to='/'>홈으로</Link> : QuizView(currentQuiz)}
     </section>
   )
 }
@@ -89,7 +188,7 @@ function QuizSessionView(state: State, onClick: (selected: string) => void) {
 function QuizSession() {
   const [initalLoaded, setInitalLoaded] = useState(false)
   const [state, setState] = useState<State | null>(null)
-
+  const [selector, dispatch] = useReducer(quizSessionReducer, initialState)
   const initState: () => Promise<State> = async () => {
     // 임시로 1초간 타임 아웃.
     await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -147,20 +246,8 @@ function QuizSession() {
       correctCount: 0,
       inCorrectCount: 0,
       currentIndex: 0,
-      quizList: [
-        {
-          index: 0,
-          text: 'apple',
-          answer: 'n. 사과',
-          selections: ['n. 사과', 'n. 밀가루 반죽']
-        },
-        {
-          index: 1,
-          text: 'brick',
-          answer: 'n. 벽돌',
-          selections: ['n. 벽돌', 'v. 뛰다, 급증하다']
-        }
-      ],
+      payload: 1,
+      quizList: [],
       quizResults: []
     }
   }
@@ -179,17 +266,10 @@ function QuizSession() {
   const quizSelected = (selected: string) => {
     if (state == null) return
 
-    const newState = quizSessionReducer(state, {
-      type: 'SELECT',
-      payload: {
-        quizIndex: state.currentIndex,
-        selected: selected
-      }
-    })
-    setState(newState)
+    return setState(selector)
   }
 
-  return <div>{state ? QuizSessionView(state, quizSelected) : '로딩중...'}</div>
+  return <div>{state ? QuizSessionView(selector, quizSelected, dispatch) : '로딩중...'}</div>
 }
 
 export default QuizSession
