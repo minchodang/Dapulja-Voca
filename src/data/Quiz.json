@@ -1,0 +1,62 @@
+[
+  {
+    "index": 0,
+    "text": "apple",
+    "answer": "n. 사과",
+    "selections": ["n. 사과", "n. 밀가루 반죽", "a. 지속적인, 끈질긴"]
+  },
+  {
+    "index": 1,
+    "text": "brick",
+    "answer": "n. 벽돌",
+    "selections": ["n. 벽돌", "n. 밀가루 반죽", "n. 사과"]
+  },
+  {
+    "index": 2,
+    "text": "completion",
+    "answer": "n. 완성, 성취",
+    "selections": ["n. 장애물", "n. 뿔, 경적", "n. 완성, 성취"]
+  },
+  {
+    "index": 3,
+    "text": "obstacle",
+    "answer": "n. 장애물",
+    "selections": ["v.뛰다, 급증하다", "n. 장애물", "n. 관광, 관광 사업"]
+  },
+  {
+    "index": 4,
+    "text": "horn",
+    "answer": "n. 뿔, 경적",
+    "selections": ["n. 벽돌", "n. 뿔, 경적", "a. 지속적인, 끈질긴"]
+  },
+  {
+    "index": 5,
+    "text": "dough",
+    "answer": "n. 밀가루 반죽",
+    "selections": ["n. 밀가루 반죽", "v.뛰다, 급증하다", "n. 진주, 진주색"]
+  },
+  {
+    "index": 6,
+    "text": "leap",
+    "answer": "v. 뛰다, 급증하다.",
+    "selections": ["v.뛰다, 급증하다", "n. 관광, 관광 사업", "n. 관광, 관광 사업"]
+  },
+  {
+    "index": 7,
+    "text": "pearl",
+    "answer": "n. 진주, 진주색",
+    "selections": ["n. 장애물", "n. 관광, 관광 사업", "n. 진주, 진주색"]
+  },
+  {
+    "index": 8,
+    "text": "tourism",
+    "answer": "n. 관광, 관광 사업",
+    "selections": ["n. 관광, 관광 사업", "n. 사과", "a. 지속적인, 끈질긴"]
+  },
+  {
+    "index": 9,
+    "text": "persisent",
+    "answer": "a. 지속적인, 끈질긴",
+    "selections": ["n. 밀가루 반죽", "a. 지속적인, 끈질긴", "n. 벽돌"]
+  }
+]
