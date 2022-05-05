@@ -71,11 +71,6 @@ export default function quizSessionReducer(
         currentIndex: state.currentIndex + 1,
         correctCount: state.correctCount + 1
       }
-    // const newState = { ...state }
-    // return {
-    //   ...newState,
-    //   currentIndex: action.currentIndex
-    // }
     case DECREASE:
       return {
         ...state,
@@ -90,6 +85,4 @@ export default function quizSessionReducer(
     default:
       return state
   }
-  // const newState = { ...state }
-  // return newState
 }
