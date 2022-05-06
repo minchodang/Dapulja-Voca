@@ -7,12 +7,14 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import rootReducer from './modules'
 import { legacy_createStore } from 'redux'
+import { GlobalStyles } from './styles'
 
 const store = legacy_createStore(rootReducer)
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+      <GlobalStyles />
       <App />
     </BrowserRouter>
   </Provider>,
