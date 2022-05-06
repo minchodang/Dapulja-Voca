@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react'
 import { correct, incorrect, final } from '../modules/counter'
 import QuizSessionView from '../components/QuizSessionView'
 
-// import { select } from '../modules/select'
-
 type State = {}
 
 function QuizSession() {
@@ -15,7 +13,6 @@ function QuizSession() {
   const quizList = useSelector((state: RootState) => state.counter.quizList)
   const currentIndex = useSelector((state: RootState) => state.counter.currentIndex)
   const quiz = useSelector((state: RootState) => state.counter.quizList[state.counter.currentIndex])
-  // const quizIndex = useSelector((state: RootState) => state.select.quizIndex)
   const dispatch = useDispatch()
   const [initalLoaded, setInitalLoaded] = useState(false)
 
@@ -23,10 +20,8 @@ function QuizSession() {
   const selecting = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLElement
     if (target.innerText === quiz.answer) {
-      // console.log(quizIndex)
       dispatch(correct())
     } else if (target.innerText !== quiz.answer) {
-      // console.log(quizIndex)
       dispatch(incorrect())
     }
     if (quizList.length - 1 === currentIndex) {

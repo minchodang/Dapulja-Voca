@@ -1,4 +1,3 @@
-import React from 'react'
 import quizData from '../data/ResultData.json'
 import quizResultData from '../data/ResultData.json'
 
@@ -52,8 +51,6 @@ type State = {
   selected: string
   quizList: Quiz[]
   quizResults: QuizResult[]
-  // selected: string // 선택한 답
-  // isCorrect: boolean | undefined // 정답여부
 }
 const initialState: State = {
   isCompleted: false,
@@ -65,8 +62,6 @@ const initialState: State = {
   payload: 1,
   quizList: quizData,
   quizResults: quizResultData
-  // selected: '', // 선택한 답
-  // isCorrect: undefined // 정답여부
 }
 
 export default function quizSessionReducer(
@@ -86,10 +81,6 @@ export default function quizSessionReducer(
         currentIndex: state.currentIndex + 1,
         correctCount: state.correctCount + 1,
         isCorrect: (state.quizResults[state.currentIndex].isCorrect = true)
-        // selected: (state.quizResults[state.currentIndex].selected = target.innerText)
-        //quizResults: state.quizResults
-        // selected: state.selected,
-        // isCorrect: true
       }
     case INCORRECT:
       return {
@@ -97,9 +88,6 @@ export default function quizSessionReducer(
         currentIndex: state.currentIndex + 1,
         inCorrectCount: state.inCorrectCount + 1,
         isCorrect: (state.quizResults[state.currentIndex].isCorrect = false)
-        // selected: (state.quizResults[state.currentIndex].selected = target.innerText)
-        // selected: state.selected,
-        // isCorrect: false
       }
     case FINAL:
       return {
