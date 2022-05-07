@@ -35,10 +35,12 @@ const ButtonContainer = styled.div`
 const ListButton1 = styled.button<Onclick>`
   width: 50%;
   display: flex;
+  font-size: 30px;
   justify-content: space-around;
 `
 const ListButton2 = styled.button<Onclick>`
   margin-top: 20px;
+  font-size: 30px;
   width: 50%;
   display: flex;
   justify-content: space-around;
