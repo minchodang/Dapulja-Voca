@@ -1,11 +1,15 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import WordView from '../components/WordView'
 
 interface Word {
   text: string
   meaning: string
+}
+type Onclick = {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 function WordList() {
@@ -33,16 +37,45 @@ function WordList() {
   // warning!
   // 만약 어떠한 이유로 작동이 되지 않는다면, 그 문제를 우회해서
   // 전체 기능이 동작하도록 코드를 구현.
-
+  const header = ['퀴즈 번호', '단어', '뜻']
   return (
-    <section>
-      {wordlist.map((word) => (
-        <WordView text={word.text} meaning={word.meaning} />
-      ))}
-      <button onClick={go}>홈으로</button>
-      <button onClick={go}>퀴즈 보기</button>
-    </section>
+    <Section>
+      <Table>
+        <thead>
+          <tr>
+            {header.map((t) => (
+              <th>{t}</th>
+            ))}
+          </tr>
+        </thead>
+        {wordlist.map((word, index) => (
+          <WordView text={word.text} meaning={word.meaning} index={index} />
+        ))}
+      </Table>
+
+      <ButtonContainer>
+        <Button1 onClick={go}>홈으로</Button1>
+        <Button2 onClick={go}>퀴즈 보기</Button2>
+      </ButtonContainer>
+    </Section>
   )
 }
+const Section = styled.section`
+  /* text-align: center; */
+  margin-top: 150px;
+`
+const Table = styled.table`
+  margin: 100px auto;
+`
+const Button1 = styled.button<Onclick>`
+  margin-right: 5%;
+`
+const Button2 = styled.button<Onclick>`
+  margin-left: 5%;
+`
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 export default WordList
