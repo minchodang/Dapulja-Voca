@@ -47,12 +47,13 @@ const ButtonContainer = styled.button<Onclick>`
   margin-left: 20px;
   /* justify-content: space-around; */
   top: 50px;
+  font-size: 25px;
 `
 const Header = styled.header`
   margin-bottom: 10%;
   position: relative;
   font-size: 50px;
-  top: 120px;
+  top: 90px;
 `
 
 const Article = styled.article`
