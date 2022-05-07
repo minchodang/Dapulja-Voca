@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from '../modules'
 import { reset } from '../modules/counter'
+import styled from 'styled-components'
 
 export default function QuizResult() {
   const header = ['퀴즈 번호', '단어', '정답', '정답 여부', '푼 날짜']
@@ -23,7 +24,7 @@ export default function QuizResult() {
       navigate('/wordlist')
     }
   }
-  const selecting = () => {
+  function reQuiz() {
     dispatch(reset())
     navigate('/quiz')
   }
@@ -55,9 +56,19 @@ export default function QuizResult() {
           </tbody>
         ))}
       </table>
-      <button onClick={go}>홈으로</button>
-      <button onClick={go}>단어 목록 보기</button>
-      <button onClick={selecting}>퀴즈 다시 풀어보기</button>
+      <ButtonContainer>
+        <button onClick={go}>홈으로</button>
+        <button onClick={go}>단어 목록 보기</button>
+        <button onClick={reQuiz}>퀴즈 다시 풀어보기</button>
+      </ButtonContainer>
     </>
   )
 }
+
+const ButtonContainer = styled.div`
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  display: flex;
+  justify-content: space-around;
+`

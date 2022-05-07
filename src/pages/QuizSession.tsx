@@ -3,6 +3,7 @@ import { RootState } from '../modules'
 import { useEffect, useState } from 'react'
 import { correct, incorrect, final } from '../modules/counter'
 import QuizSessionView from '../components/QuizSessionView'
+import styled from 'styled-components'
 
 type State = {}
 
@@ -59,10 +60,16 @@ function QuizSession() {
           />
         </>
       ) : (
-        <div>로딩중...</div>
+        <Loading>로딩중...</Loading>
       )}
     </>
   )
 }
+
+const Loading = styled.div`
+  position: relative;
+  font-size: 50px;
+  top: 200px;
+`
 
 export default QuizSession

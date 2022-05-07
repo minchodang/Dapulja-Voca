@@ -1,14 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
-
+import reset from 'styled-reset'
 export default createGlobalStyle`
-html { height: 100%; 
-  
-  body { display: flex; flex-direction: row; height: 100%; margin: 0;
- justify-content: center;
-    button{
-      
+    ${reset};
+    *{
+        box-sizing:boerder-box;
     }
-
-  #root {justify-content: center; padding: 15px; 
-  text-align: center;
-  }}}`
+  `
