@@ -1,4 +1,9 @@
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+
+type Onclick = {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
 
 function Home() {
   const navigate = useNavigate()
@@ -11,11 +16,31 @@ function Home() {
     }
   }
   return (
-    <>
-      <button onClick={go}>단어 목록 보기</button>
-      <button onClick={go}>퀴즈 보기</button>
-    </>
+    <ButtonContainer>
+      <ListButton1 onClick={go}>단어 목록 보기</ListButton1>
+      <ListButton2 onClick={go}>퀴즈 보기</ListButton2>
+    </ButtonContainer>
   )
 }
 
+const ButtonContainer = styled.div`
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-around; */
+`
+const ListButton1 = styled.button<Onclick>`
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+`
+const ListButton2 = styled.button<Onclick>`
+  margin-top: 20px;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+`
 export default Home
