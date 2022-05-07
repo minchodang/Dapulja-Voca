@@ -41,13 +41,13 @@ function WordList() {
   return (
     <Section>
       <Table>
-        <thead>
+        <Thead>
           <tr>
             {header.map((t) => (
               <th>{t}</th>
             ))}
           </tr>
-        </thead>
+        </Thead>
         {wordlist.map((word, index) => (
           <WordView text={word.text} meaning={word.meaning} index={index} />
         ))}
@@ -60,18 +60,26 @@ function WordList() {
     </Section>
   )
 }
+
+const Thead = styled.thead`
+  text-align: center;
+`
+
 const Section = styled.section`
   /* text-align: center; */
   margin-top: 150px;
 `
 const Table = styled.table`
   margin: 100px auto;
+  font-size: 35px;
 `
 const Button1 = styled.button<Onclick>`
-  margin-right: 5%;
+  font-size: 30px;
+  margin-right: 3%;
 `
 const Button2 = styled.button<Onclick>`
-  margin-left: 5%;
+  font-size: 30px;
+  margin-left: 3%;
 `
 const ButtonContainer = styled.div`
   display: flex;

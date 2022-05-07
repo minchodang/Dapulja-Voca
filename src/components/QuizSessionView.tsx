@@ -9,6 +9,10 @@ type CounterProps = {
   selecting: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
+type Onclick = {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
+
 // View
 export default function QuizSessionView({
   correctCount,
@@ -34,16 +38,31 @@ export default function QuizSessionView({
         <div>틀린 개수 {inCorrectCount}</div>
       </StatusContainer>
       {isCompleted ? (
-        <>
-          <button onClick={go}>홈으로</button>
-          <button onClick={go}>결과창으로</button>
-        </>
+        <Buttons>
+          <Button1 onClick={go}>홈으로</Button1>
+          <Button2 onClick={go}>결과창으로</Button2>
+        </Buttons>
       ) : (
         <QuizView selecting={selecting} />
       )}
     </Section>
   )
 }
+
+const Buttons = styled.div`
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+`
+
+const Button1 = styled.button<Onclick>`
+  margin-right: 1%;
+  font-size: 30px;
+`
+const Button2 = styled.button<Onclick>`
+  margin-left: 1%;
+  font-size: 30px;
+`
 
 const Section = styled.section`
   /* position: relative;
@@ -52,5 +71,5 @@ const Section = styled.section`
 `
 const StatusContainer = styled.div`
   position: relative;
-  top: 150px;
+  top: 130px;
 `
