@@ -10,7 +10,7 @@ type Onclick = {
 }
 
 export default function QuizResult() {
-  const header = ['퀴즈 번호', '단어', '정답', '정답 여부', '푼 날짜']
+  const header = ['퀴즈 번호', '단어', '정답', '선택한 답', '정답 여부', '푼 날짜']
   const quizResult = useSelector((state: RootState) => state.counter.quizResults)
 
   const today = new Date()
@@ -49,6 +49,7 @@ export default function QuizResult() {
             <Td>{t.index + 1}</Td>
             <Td>{t.text}</Td>
             <Td>{t.answer}</Td>
+            <Td>{t.selected}</Td>
             <Td>{t.isCorrect ? '정답' : '오답'}</Td>
             <Td>{year + '/' + month + '/' + day}</Td>
           </Tbody>

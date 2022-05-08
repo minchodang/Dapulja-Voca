@@ -1,18 +1,18 @@
 import quizData from '../data/ResultData.json'
 import quizResultData from '../data/ResultData.json'
 
-const CORRECT = 'counter/CORRECT' as const
-const INCORRECT = 'counter/INCORRECT' as const
+// const CORRECT = 'counter/CORRECT' as const
+// const INCORRECT = 'counter/INCORRECT' as const
 const FINAL = 'counter/FINAL' as const
 const RESET = 'counter/RESET' as const
 
-export const correct = () => ({
-  type: CORRECT
-})
+// export const correct = () => ({
+//   type: CORRECT
+// })
 
-export const incorrect = () => ({
-  type: INCORRECT
-})
+// export const incorrect = () => ({
+//   type: INCORRECT
+// })
 export const final = () => ({
   type: FINAL
 })
@@ -21,8 +21,22 @@ export const reset = () => ({
 })
 
 type CounterAction =
-  | ReturnType<typeof correct>
-  | ReturnType<typeof incorrect>
+  // | ReturnType<typeof correct>
+  // | ReturnType<typeof incorrect>
+  | {
+      type: 'CORRECT'
+      currentIndex: number
+      correctCount: number
+      isCorrect: boolean
+      selected: string
+    }
+  | {
+      type: 'INCORRECT'
+      currentIndex: number
+      incorrectCount: number
+      isCorrect: boolean
+      selected: string
+    }
   | ReturnType<typeof final>
   | ReturnType<typeof reset>
 
@@ -75,19 +89,21 @@ export default function quizSessionReducer(
   // 맞은 혹은 틀린 개수가 업데이트 되고,
   // 다음 퀴즈로 넘어가야 함.
   switch (action.type) {
-    case CORRECT:
+    case 'CORRECT':
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
         correctCount: state.correctCount + 1,
-        isCorrect: (state.quizResults[state.currentIndex].isCorrect = true)
+        isCorrect: (state.quizResults[state.currentIndex].isCorrect = true),
+        selected: (state.quizResults[state.currentIndex].selected = action.selected)
       }
-    case INCORRECT:
+    case 'INCORRECT':
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
         inCorrectCount: state.inCorrectCount + 1,
-        isCorrect: (state.quizResults[state.currentIndex].isCorrect = false)
+        isCorrect: (state.quizResults[state.currentIndex].isCorrect = false),
+        selected: (state.quizResults[state.currentIndex].selected = action.selected)
       }
     case FINAL:
       return {
