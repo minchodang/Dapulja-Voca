@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../modules'
 import { useEffect, useState } from 'react'
-import { correct, incorrect, final } from '../modules/counter'
+import { final } from '../modules/counter'
 import QuizSessionView from '../components/QuizSessionView'
 import styled from 'styled-components'
 
@@ -21,9 +21,9 @@ function QuizSession() {
   const selecting = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLElement
     if (target.innerText === quiz.answer) {
-      dispatch(correct())
+      dispatch({ type: 'CORRECT', selected: target.innerText })
     } else if (target.innerText !== quiz.answer) {
-      dispatch(incorrect())
+      dispatch({ type: 'INCORRECT', selected: target.innerText })
     }
     if (quizList.length - 1 === currentIndex) {
       dispatch(final())
