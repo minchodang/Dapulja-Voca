@@ -33,12 +33,38 @@ const ButtonContainer = styled.div`
   /* justify-content: space-around; */
 `
 const ListButton1 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   width: 50%;
   display: flex;
   font-size: 30px;
   justify-content: space-around;
 `
 const ListButton2 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   margin-top: 20px;
   font-size: 30px;
   width: 50%;

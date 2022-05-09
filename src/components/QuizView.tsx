@@ -15,16 +15,6 @@ type Onclick = {
 export default function QuizView({ selecting }: CounterProps) {
   const quiz = useSelector((state: RootState) => state.counter.quizList[state.counter.currentIndex])
 
-  // const articleStyle = {
-  //   margin: '16px',
-  //   padding: '8px',
-  //   background: '#efefef'
-  // }
-  // const buttonStyle = {
-  //   display: 'flex',
-  //   flexdirection: 'column'
-  // }
-
   return (
     <>
       <Article>
@@ -42,18 +32,33 @@ export default function QuizView({ selecting }: CounterProps) {
 }
 
 const ButtonContainer = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   margin-bottom: 100px;
-  /* position: relative; */
   margin-left: 20px;
-  /* justify-content: space-around; */
-  top: 50px;
+  position: relative;
+  text-align: center;
+  /* left: 50px; */
+  top: -50px;
   font-size: 25px;
 `
 const Header = styled.header`
   margin-bottom: 10%;
   position: relative;
   font-size: 50px;
-  top: 90px;
+  top: 100px;
+  text-align: center;
 `
 
 const Article = styled.article`

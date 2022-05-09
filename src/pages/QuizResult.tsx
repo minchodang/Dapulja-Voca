@@ -12,7 +12,6 @@ type Onclick = {
 export default function QuizResult() {
   const header = ['퀴즈 번호', '단어', '정답', '선택한 답', '정답 여부', '푼 날짜']
   const quizResult = useSelector((state: RootState) => state.counter.quizResults)
-
   const today = new Date()
   let year = today.getFullYear() // 년도
   let month = today.getMonth()
@@ -79,19 +78,58 @@ const Td = styled.td`
 `
 
 const ButtonContainer = styled.div`
-  margin-top: -70px;
+  margin-top: -120px;
   display: flex;
   justify-content: center;
 `
 
 const Button1 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 35px;
   margin-right: 70px;
 `
 const Button2 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 35px;
   margin-right: 70px;
 `
 const Button3 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 35px;
 `

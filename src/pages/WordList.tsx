@@ -15,11 +15,7 @@ type Onclick = {
 function WordList() {
   const [wordlist, setWordlist] = useState<Word[]>([])
   useEffect(() => {
-    axios
-      .get<Word[]>(
-        'https://cors-anywhere.herokuapp.com/https://solution-tmp.s3.ap-northeast-2.amazonaws.com/vocabs.json'
-      )
-      .then((res) => setWordlist(res.data))
+    axios.get<Word[]>('/vocabs.json').then((res) => setWordlist(res.data))
   }, [])
   const navigate = useNavigate()
   function go(e: React.MouseEvent<HTMLButtonElement>) {
@@ -74,10 +70,36 @@ const Table = styled.table`
   font-size: 35px;
 `
 const Button1 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 30px;
   margin-right: 3%;
 `
 const Button2 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 30px;
   margin-left: 3%;
 `
