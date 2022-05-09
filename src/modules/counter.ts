@@ -1,18 +1,9 @@
 import quizData from '../data/ResultData.json'
 import quizResultData from '../data/ResultData.json'
 
-// const CORRECT = 'counter/CORRECT' as const
-// const INCORRECT = 'counter/INCORRECT' as const
 const FINAL = 'counter/FINAL' as const
 const RESET = 'counter/RESET' as const
 
-// export const correct = () => ({
-//   type: CORRECT
-// })
-
-// export const incorrect = () => ({
-//   type: INCORRECT
-// })
 export const final = () => ({
   type: FINAL
 })
@@ -21,8 +12,6 @@ export const reset = () => ({
 })
 
 type CounterAction =
-  // | ReturnType<typeof correct>
-  // | ReturnType<typeof incorrect>
   | {
       type: 'CORRECT'
       currentIndex: number
