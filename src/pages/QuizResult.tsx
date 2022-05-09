@@ -79,19 +79,58 @@ const Td = styled.td`
 `
 
 const ButtonContainer = styled.div`
-  margin-top: -70px;
+  margin-top: -120px;
   display: flex;
   justify-content: center;
 `
 
 const Button1 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 35px;
   margin-right: 70px;
 `
 const Button2 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 35px;
   margin-right: 70px;
 `
 const Button3 = styled.button<Onclick>`
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 30px;
+  font-family: sans-serif;
+  transition: all 0.4s;
   font-size: 35px;
 `
