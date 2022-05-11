@@ -15,11 +15,7 @@ type Onclick = {
 function WordList() {
   const [wordlist, setWordlist] = useState<Word[]>([])
   useEffect(() => {
-    axios
-      .get<Word[]>(
-        'https://cors-anywhere.herokuapp.com/https://solution-tmp.s3.ap-northeast-2.amazonaws.com/vocabs.json'
-      )
-      .then((res) => setWordlist(res.data))
+    axios.get<Word[]>('/vocabs.json').then((res) => setWordlist(res.data))
   }, [])
   const navigate = useNavigate()
   function go(e: React.MouseEvent<HTMLButtonElement>) {
