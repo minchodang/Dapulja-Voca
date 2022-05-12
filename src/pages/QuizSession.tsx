@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../modules'
 import { useEffect, useState } from 'react'
-import { final } from '../modules/counter'
+import { correct, final, incorrect } from '../modules/counter'
 import QuizSessionView from '../components/QuizSessionView'
 import styled from 'styled-components'
 
@@ -15,15 +15,21 @@ function QuizSession() {
   const currentIndex = useSelector((state: RootState) => state.counter.currentIndex)
   const quiz = useSelector((state: RootState) => state.counter.quizList[state.counter.currentIndex])
   const dispatch = useDispatch()
+  // let selected = useSelector(
+  //   (state: RootState) => state.counter.selected[state.counter.currentIndex]
+  // )
   const [initalLoaded, setInitalLoaded] = useState(false)
 
   //디스패치 함수 설정.
   const selecting = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLElement
-    if (target.innerText === quiz.answer) {
-      dispatch({ type: 'CORRECT', selected: target.innerText })
-    } else if (target.innerText !== quiz.answer) {
-      dispatch({ type: 'INCORRECT', selected: target.innerText })
+    const selected = target.innerText
+    if (selected === quiz.answer) {
+      // dispatch({ type: 'CORRECT', selected: target.innerText })
+      dispatch(correct(selected))
+    } else if (selected !== quiz.answer) {
+      // dispatch({ type: 'INCORRECT', selected: target.innerText })
+      dispatch(incorrect(selected))
     }
     if (quizList.length - 1 === currentIndex) {
       dispatch(final())
