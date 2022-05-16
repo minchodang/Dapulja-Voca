@@ -8,9 +8,9 @@ import styled from 'styled-components'
 type State = {}
 
 function QuizSession() {
-  const correctCount = useSelector((state: RootState) => state.counter.correctCount)
-  const isCompleted = useSelector((state: RootState) => state.counter.isCompleted)
-  const inCorrectCount = useSelector((state: RootState) => state.counter.inCorrectCount)
+  // const correctCount = useSelector((state: RootState) => state.counter.correctCount)
+  // const isCompleted = useSelector((state: RootState) => state.counter.isCompleted)
+  // const inCorrectCount = useSelector((state: RootState) => state.counter.inCorrectCount)
   const quizList = useSelector((state: RootState) => state.counter.quizList)
   const currentIndex = useSelector((state: RootState) => state.counter.currentIndex)
   const quiz = useSelector((state: RootState) => state.counter.quizList[state.counter.currentIndex])
@@ -58,12 +58,7 @@ function QuizSession() {
     <>
       {initalLoaded ? (
         <>
-          <QuizSessionView
-            correctCount={correctCount}
-            isCompleted={isCompleted}
-            inCorrectCount={inCorrectCount}
-            selecting={selecting}
-          />
+          <QuizSessionView selecting={selecting} />
         </>
       ) : (
         <Loading>로딩중...</Loading>

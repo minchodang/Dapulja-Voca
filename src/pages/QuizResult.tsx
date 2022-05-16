@@ -12,7 +12,6 @@ type Onclick = {
 export default function QuizResult() {
   const header = ['퀴즈 번호', '단어', '정답', '선택한 답', '정답 여부', '푼 날짜']
   const quizResult = useSelector((state: RootState) => state.counter.quizResults)
-
   const today = new Date()
   let year = today.getFullYear() // 년도
   let month = today.getMonth()
