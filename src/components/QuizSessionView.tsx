@@ -1,11 +1,13 @@
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import QuizView from './QuizView'
+import { RootState } from '../modules'
 
 type CounterProps = {
-  correctCount: number
-  isCompleted: boolean
-  inCorrectCount: number
+  // correctCount: number
+  // isCompleted: boolean
+  // inCorrectCount: number
   selecting: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
@@ -14,14 +16,12 @@ type Onclick = {
 }
 
 // View
-export default function QuizSessionView({
-  correctCount,
-  isCompleted,
-  inCorrectCount,
-  selecting
-}: CounterProps) {
+export default function QuizSessionView({ selecting }: CounterProps) {
   const navigate = useNavigate()
 
+  const correctCount = useSelector((state: RootState) => state.counter.correctCount)
+  const isCompleted = useSelector((state: RootState) => state.counter.isCompleted)
+  const inCorrectCount = useSelector((state: RootState) => state.counter.inCorrectCount)
   function go(e: React.MouseEvent<HTMLButtonElement>) {
     const target = e.target as HTMLElement
     if (target.innerText === '홈으로') {
