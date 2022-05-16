@@ -84,7 +84,7 @@ export default function quizSessionReducer(
         currentIndex: state.currentIndex + 1,
         correctCount: state.correctCount + 1,
         isCorrect: (state.quizResults[state.currentIndex].isCorrect = true),
-        selected: (state.quizResults[state.currentIndex].selected = action.selected)
+        selected: (state.quizResults[state.currentIndex].selected = action.selected),
       }
     case INCORRECT:
       return {
