@@ -12,6 +12,9 @@ function QuizSession() {
   const currentIndex = useSelector((state: RootState) => state.counter.currentIndex)
   const quiz = useSelector((state: RootState) => state.counter.quizList[state.counter.currentIndex])
   const dispatch = useDispatch()
+  // let selected = useSelector(
+  //   (state: RootState) => state.counter.selected[state.counter.currentIndex]
+  // )
   const [initalLoaded, setInitalLoaded] = useState(false)
 
   //디스패치 함수 설정.
@@ -19,6 +22,9 @@ function QuizSession() {
     const target = e.target as HTMLElement
     const selected = target.innerText
     if (selected === quiz.answer) {
+
+      dispatch(correct(selected))
+    } else if (selected !== quiz.answer) {
       dispatch(correct(selected))
     } else if (selected !== quiz.answer) {
       dispatch(incorrect(selected))
