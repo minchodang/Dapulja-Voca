@@ -8,9 +8,6 @@ import styled from 'styled-components'
 type State = {}
 
 function QuizSession() {
-  // const correctCount = useSelector((state: RootState) => state.counter.correctCount)
-  // const isCompleted = useSelector((state: RootState) => state.counter.isCompleted)
-  // const inCorrectCount = useSelector((state: RootState) => state.counter.inCorrectCount)
   const quizList = useSelector((state: RootState) => state.counter.quizList)
   const currentIndex = useSelector((state: RootState) => state.counter.currentIndex)
   const quiz = useSelector((state: RootState) => state.counter.quizList[state.counter.currentIndex])
@@ -25,10 +22,11 @@ function QuizSession() {
     const target = e.target as HTMLElement
     const selected = target.innerText
     if (selected === quiz.answer) {
-      // dispatch({ type: 'CORRECT', selected: target.innerText })
+
       dispatch(correct(selected))
     } else if (selected !== quiz.answer) {
-      // dispatch({ type: 'INCORRECT', selected: target.innerText })
+      dispatch(correct(selected))
+    } else if (selected !== quiz.answer) {
       dispatch(incorrect(selected))
     }
     if (quizList.length - 1 === currentIndex) {
